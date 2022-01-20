@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bookstore Home Page</title>
+    <link rel="stylesheet" th:href="@{/css/tablestyle.css}" />
+</head>
+
+<body>
+    <h1>Great Books</h1>
+    <h2>Show books</h2>
+
+    <table id="books">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>Price</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="b: ${books}">
+            <td th:text="${b.title}"></td>
+            <td th:text="${b.author}"></td>
+            <td th:text="${b.publisher}"></td>
+            <td th:text="${b.price}"></td>
+            <form action="/updatebook" method="GET">
+                <th><input type="submit" value="Update"/></th>
+                <input type="hidden" name="title" th:value="${b.title}"/>
+            </form>
+            <form action="/deletebook" method="POST">
+                <th><input type="submit" value="Delete"/></th>
+                <input type="hidden" name="title" th:value="${b.title}"/>
+            </form>
+        </tr>
+    </table>
+    <hr />
+    <a th:href=@{/newbook}>Add New BOOK</a>
+</body>
+</html>
